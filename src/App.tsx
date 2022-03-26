@@ -1,7 +1,35 @@
 import React from "react";
+import LoginForm from "./Login/LoginForm";
+import { Routes, Route } from "react-router-dom";
+import Layout from "./Layout";
+
+import NotFoundPage from "./NotFoundPage";
+import WebsiteList from "./Websites/WebsiteList";
+
+import RequireAuth from "./Login/RequireAuth";
+import LoginPage from "./Login/LoginPage";
+import { AuthProvider } from "./Login/auth";
+
 const App = () => {
   return (
-    <h1 className="text-3xl bg-green-500 font-bold underline">Hello world!</h1>
+    <div className="App">
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route
+              index
+              element={
+                <RequireAuth>
+                  <WebsiteList />
+                </RequireAuth>
+              }
+            />
+            <Route path="login" element={<LoginPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+        </Routes>
+      </AuthProvider>
+    </div>
   );
 };
 
