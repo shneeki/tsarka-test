@@ -15,16 +15,16 @@ const App = () => {
     <div className="App">
       <AuthProvider>
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route element={<Layout />}>
             <Route
-              index
+              path="/"
               element={
                 <RequireAuth>
                   <WebsiteList />
                 </RequireAuth>
               }
             />
-            <Route path="login" element={<LoginPage />} />
+            <Route path="/login" element={<LoginPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
