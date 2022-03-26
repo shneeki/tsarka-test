@@ -24,7 +24,7 @@ const App = () => {
                 </RequireAuth>
               }
             />
-            <Route path="/login" element={<LoginPage />} />
+            <Route path="/login" element={<LoginForm />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
