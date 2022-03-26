@@ -1,13 +1,10 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
 
-function App() {
+const App = () => {
   return (
-    <h1 className="text-3xl bg-blue-500 font-bold underline">
-    Hello world!
-  </h1>
+    <h1 className="text-3xl bg-yellow-500 font-bold underline">Hello world!</h1>
   );
-}
+};
 
 export default App;
