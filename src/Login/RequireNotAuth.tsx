@@ -8,7 +8,7 @@ interface AuthProps {
 
 const RequireNotAuth = ({ children }: AuthProps) => {
   const location = useLocation();
-  const [getToken] = useAuthToken("auth-token");
+  const [getToken] = useAuthToken("refresh-token");
 
   const isAuth = !!getToken();
 

@@ -50,8 +50,9 @@ export const useAppApolloClient = () => {
       } else {
         removeAuth();
 
-        if (!refreshCookie) {
+        if (!!!refreshCookie) {
           //redirect to login page, somehow we ended up with no refresh token and existing but invalid auth token
+
           navigate("/login");
         }
       }
@@ -81,11 +82,15 @@ export const useAppApolloClient = () => {
 
   const errorLink = onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors)
-      graphQLErrors.forEach(({ message, locations, path }) =>
+      graphQLErrors.forEach(({ message, locations, path }) => {
         console.log(
           `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-        )
-      );
+        );
+        if (message === "INVALID_TOKEN") {
+          removeAuth();
+          navigate("/");
+        }
+      });
     if (networkError) console.log(`[Network error]: ${networkError}`);
   });
   const cache = new InMemoryCache({});
