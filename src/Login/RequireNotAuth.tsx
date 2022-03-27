@@ -6,15 +6,16 @@ interface AuthProps {
   children: JSX.Element;
 }
 
-const RequireAuth = ({ children }: AuthProps) => {
+const RequireNotAuth = ({ children }: AuthProps) => {
   const location = useLocation();
   const [getToken] = useAuthToken("auth-token");
 
   const isAuth = !!getToken();
-  if (!isAuth) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
+
+  if (isAuth) {
+    return <Navigate to="/" state={{ from: location }} replace />;
   }
   return children;
 };
 
-export default RequireAuth;
+export default RequireNotAuth;

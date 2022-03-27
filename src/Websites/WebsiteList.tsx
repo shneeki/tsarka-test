@@ -1,15 +1,15 @@
 import * as React from "react";
-const WebsiteList = () => {
+import { string } from "yup";
+
+interface IWebsiteList {
+  items: { host: string; id: number }[];
+}
+const WebsiteList = ({ items }: IWebsiteList) => {
   return (
     <ol>
-      <li>ONE</li>
-      <li>ONE</li>
-      <li>ONE</li>
-      <li>ONE</li>
-      <li>ONE</li>
-      <li>ONE</li>
-      <li>ONE</li>
-      <li>ONE</li>
+      {items.map((item) => (
+        <li key={item.id}>{item.host}</li>
+      ))}
     </ol>
   );
 };
