@@ -1,23 +1,23 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
+import "./App.css";
 
-import NotFoundPage from "./NotFoundPage";
-
-import RequireAuth from "./Login/RequireAuth";
-import LoginPage from "./Login/LoginPage";
 import { AuthProvider } from "./Login/auth";
-
+import { ApolloProvider } from "@apollo/client";
 import { useAppApolloClient } from "./Login/Apollo/ApolloClient";
-import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
-import RequireNotAuth from "./Login/RequireNotAuth";
+
+import LoginPage from "./Login/LoginPage";
 import WebsitesPage from "./Websites/WebsitesPage";
+
+import RequireNotAuth from "./Login/RequireNotAuth";
+import RequireAuth from "./Login/RequireAuth";
 
 const App = () => {
   const client = useAppApolloClient();
 
   return (
-    <div className="App">
+    <>
       <ApolloProvider client={client}>
         <AuthProvider>
           <Routes>
@@ -38,12 +38,19 @@ const App = () => {
                   </RequireNotAuth>
                 }
               />
-              <Route path="*" element={<NotFoundPage />} />
+              <Route
+                path="*"
+                element={
+                  <RequireAuth>
+                    <WebsitesPage />
+                  </RequireAuth>
+                }
+              />
             </Route>
           </Routes>
         </AuthProvider>
       </ApolloProvider>
-    </div>
+    </>
   );
 };
 

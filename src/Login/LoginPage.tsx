@@ -18,7 +18,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="bg-blue-300 overflow-x-hidden">
+    <div className=" overflow-x-hidden">
       <LoginForm onSubmitHandler={handleSubmit} />
     </div>
   );
